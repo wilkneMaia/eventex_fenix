@@ -12,12 +12,14 @@ def subscribe(request):
         form = SubscriptionForm(request.POST)
 
         if form.is_valid():
-            body = render_to_string('subscriptions/subscription_email.txt', form.cleaned_data)
+            body = render_to_string(
+                'subscriptions/subscription_email.txt', form.cleaned_data)
             mail.send_mail(
                 'Confirmação de inscrição',
                 body,
-                'contato@eventex.com',
-                ['contato@eventex.com', form.cleaned_data['email']] # O email do usuário é enviado para o email do site
+                'wilkenes@gmail.com',
+                # O email do usuário é enviado para o email do site
+                ['wilkenes@gmail.com', form.cleaned_data['email']]
             )
             messages.success(request, 'Inscrição realizada com sucesso!')
             return HttpResponseRedirect('/inscricao/')
